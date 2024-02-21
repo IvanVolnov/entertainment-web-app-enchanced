@@ -1,6 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyles = createGlobalStyle`
+
 *,
 *::before,
 *::after {
@@ -20,10 +21,15 @@ ul {
   list-style: none;
 }
 body {
-    min-height: 100vh;
-    min-height: 100svh;
-    background-color: ${({ theme }) => theme.colors.background};
+  font-family: "Outfit", sans-serif;
+  font-optical-sizing: auto;
+  color: ${({ theme }) => theme.colors.text};
+  font-style: normal;
+  min-height: 100vh;
+  min-height: 100svh;
+  background-color: ${({ theme }) => theme.colors.background};
 }
+
 
 `;
 

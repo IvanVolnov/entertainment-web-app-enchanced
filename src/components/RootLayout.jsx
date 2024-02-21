@@ -1,8 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
-
-import logImg from '../assets/logo.svg';
 import GlobalStyles from './styles/Global';
+import NavMenu from './NavMenu';
 
 const theme = {
   colors: {
@@ -14,39 +13,21 @@ const theme = {
   },
 };
 
-const Menu = styled.header`
+const Wrapper = styled.div`
+  min-height: 100vh;
+  min-height: 100svh;
   display: flex;
-  flex-direction: column;
-  height: 100swh;
-  justify-content: space-between;
+  align-items: stretch;
 `;
-
-const Logo = styled.img`
-  width: 100px;
-  height: 200px;
-`;
-
-const NavBar = styled.nav`
-  display: flex;
-  flex-direction: column;
-`;
-
-const Account = styled.div``;
 
 export default function RootLayout() {
   return (
-    <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      <Menu>
-        <Logo src={logImg} />
-        <NavBar>
-          <div>Home</div>
-          <div>Movies</div>
-          <div>Series</div>
-        </NavBar>
-        <Account />
-      </Menu>
-      <Outlet />
-    </ThemeProvider>
+    <Wrapper>
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
+        <NavMenu />
+        <Outlet />
+      </ThemeProvider>
+    </Wrapper>
   );
 }
