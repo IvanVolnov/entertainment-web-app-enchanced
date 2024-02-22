@@ -1,8 +1,11 @@
 import styled from 'styled-components';
-
-import logImg from '../assets/logo.svg';
-import avatarImg from '../assets/image-avatar.png';
 import { Link } from 'react-router-dom';
+
+import logImg from '../../public/assets/logo.svg';
+import moviesIvon from '../../public/assets/icon-nav-movies.svg';
+import homeIcon from '../../public/assets/icon-nav-home.svg';
+import avatarImg from '../../public/assets/image-avatar.png';
+import NavBtn from './UI/NavBtn';
 
 const Menu = styled.header`
   margin: 2rem;
@@ -25,6 +28,7 @@ const Logo = styled.img`
 const NavBar = styled.nav`
   display: flex;
   flex-direction: column;
+  gap: 2.5rem;
 `;
 
 const Account = styled(Link)``;
@@ -34,8 +38,8 @@ export default function NavMenu() {
     <Menu>
       <Logo src={logImg} alt='logo image' />
       <NavBar>
-        <div>Home</div>
-        <div>Movies</div>
+        <NavBtn route='/' img={homeIcon} alt='home icon' />
+        <NavBtn route='/movies' img={moviesIvon} alt='movies icon' />
         <div>Series</div>
       </NavBar>
       <Account bacground={avatarImg} />
