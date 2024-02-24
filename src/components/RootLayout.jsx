@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import styled, { ThemeProvider } from 'styled-components';
-import GlobalStyles from './styles/Global';
+import { GlobalStyles, media } from '../styles/Global';
 import NavMenu from './NavMenu';
 
 const theme = {
@@ -18,6 +18,10 @@ const Wrapper = styled.div`
   min-height: 100svh;
   display: flex;
   align-items: stretch;
+
+  @media ${media.tablet} {
+    flex-direction: column;
+  }
 `;
 
 export default function RootLayout() {

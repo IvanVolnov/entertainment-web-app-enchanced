@@ -1,10 +1,11 @@
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 
 import RootLayout from './components/RootLayout';
-import HomeScreen from './components/HomeScreen';
-import MoviesScreen from './components/MoviesScreen';
-import SeriesScreen from './components/SeriesScreen';
-import Login from './components/Login';
+import HomeScreen from './pages/HomeScreen';
+import MoviesScreen from './pages/MoviesScreen';
+import SeriesScreen from './pages/SeriesScreen';
+import BookmarkedScreen from './pages/BookmarkedScreen';
+import Login from './pages/Login';
 
 const router = createBrowserRouter([
   {
@@ -15,12 +16,13 @@ const router = createBrowserRouter([
       { path: '/', element: <HomeScreen /> },
       { path: '/movies', element: <MoviesScreen /> },
       { path: '/series', element: <SeriesScreen /> },
+      { path: '/bookmarked', element: <BookmarkedScreen /> },
       { path: '/login', element: <Login /> },
     ],
   },
 ]);
 
 function App() {
-  return <RouterProvider router={router} />; // привязываем router
+  return <RouterProvider router={router} />;
 }
 export default App;

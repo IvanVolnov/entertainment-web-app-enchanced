@@ -1,22 +1,33 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
 import logImg from '../../public/assets/logo.svg';
-import moviesIvon from '../../public/assets/icon-nav-movies.svg';
-import homeIcon from '../../public/assets/icon-nav-home.svg';
-import avatarImg from '../../public/assets/image-avatar.png';
+import MoviesIcon from '../../public/assets/icon-nav-movies.svg?react';
 import NavBtn from './UI/NavBtn';
+import HomeIcon from '../../public/assets/icon-nav-home.svg?react';
+import SeriesIcon from '../../public/assets/icon-nav-tv-series.svg?react';
+import BookmarkIcon from '../../public/assets/icon-nav-bookmark.svg?react';
+import Account from './UI/Account';
+import { media } from '../styles/Global';
 
 const Menu = styled.header`
   margin: 2rem;
   width: 6rem;
+  max-height: 60rem;
   background-color: ${({ theme }) => theme.colors.backgroundLight};
   border-radius: 20px;
-  padding: 2.21rem 0rem 2rem;
+  padding: 2.21rem 0rem 1.74rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  gap: 4.69rem;
+
+  @media ${media.tablet} {
+    margin: 1.56rem 1.44rem;
+    gap: none;
+    width: 100vw;
+    flex-direction: row;
+    justify-content: space-between;
+  }
 `;
 
 const Logo = styled.img`
@@ -28,21 +39,38 @@ const Logo = styled.img`
 const NavBar = styled.nav`
   display: flex;
   flex-direction: column;
-  gap: 2.5rem;
-`;
+  flex-grow: 1;
+  gap: 2.2rem;
 
-const Account = styled(Link)``;
+  @media ${media.tablet} {
+    flex-direction: row;
+    flex-grow: 0;
+  }
+`;
 
 export default function NavMenu() {
   return (
     <Menu>
       <Logo src={logImg} alt='logo image' />
       <NavBar>
-        <NavBtn route='/' img={homeIcon} alt='home icon' />
-        <NavBtn route='/movies' img={moviesIvon} alt='movies icon' />
-        <div>Series</div>
+        <NavBtn route='/' icon={<HomeIcon />} aria-label='home icon' />
+        <NavBtn
+          route='/movies'
+          icon={<MoviesIcon />}
+          aria-label='movies_icon'
+        />
+        <NavBtn
+          route='/series'
+          icon={<SeriesIcon />}
+          aria-label='series_icon'
+        />
+        <NavBtn
+          route='/bookmarked'
+          icon={<BookmarkIcon />}
+          aria-label='bookmark_icon'
+        />
       </NavBar>
-      <Account bacground={avatarImg} />
+      <Account />
     </Menu>
   );
 }

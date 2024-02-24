@@ -1,6 +1,12 @@
 import { createGlobalStyle } from 'styled-components';
 
-const GlobalStyles = createGlobalStyle`
+export const media = {
+  mobile: `(max-width: 375px)`,
+  tablet: `(max-width: 768px)`,
+  laptop: `(max-width: 1024px)`,
+};
+
+export const GlobalStyles = createGlobalStyle`
 
 *,
 *::before,
@@ -32,5 +38,3 @@ body {
 
 
 `;
-
-export default GlobalStyles;

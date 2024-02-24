@@ -1,26 +1,37 @@
 import styled from 'styled-components';
-import homeIcon from '../../../public/assets/icon-nav-home.svg';
 
-const IconWrapper = styled.div`
-  &:hover {
+import { NavLink } from 'react-router-dom';
+
+const IconWrapper = styled(NavLink)`
+  svg {
+    width: 1.25rem;
+    height: 1.25rem;
+    cursor: pointer;
+  }
+
+  &.active {
     svg {
-      fill: red; // Apply fill color to the SVG on hover
+      path {
+        fill: ${({ theme }) => theme.colors.text};
+      }
+    }
+  }
+
+  svg:hover {
+    path {
+      fill: ${({ theme }) => theme.colors.highlight};
     }
   }
 `;
 
-const Icon = styled.img`
-  // Add any additional styling for the SVG image here
-`;
-
-export default function NavBtn() {
+export default function NavBtn({ route, icon }) {
   return (
-    <IconWrapper>
-      <Icon src={homeIcon} alt='Home' />
+    <IconWrapper
+      to={route}
+      className={({ isActive }) => (isActive ? '.active' : undefined)}
+      end
+    >
+      {icon}
     </IconWrapper>
   );
 }
-
-//  <NavLink to={route} end>
-//    <Icon />
-//  </NavLink>;
