@@ -21,6 +21,7 @@ const Wrapper = styled.div`
 
   @media ${media.tablet} {
     flex-direction: column;
+    justify-items: stretch;
   }
 `;
 

@@ -2,11 +2,16 @@ import styled from 'styled-components';
 
 import { NavLink } from 'react-router-dom';
 
+import { media } from '../../styles/Global';
+
 const IconWrapper = styled(NavLink)`
+  width: 1.25rem;
+  height: 1.25rem;
+  cursor: pointer;
+  align-content: center;
   svg {
-    width: 1.25rem;
-    height: 1.25rem;
-    cursor: pointer;
+    width: 100%;
+    height: 100%;
   }
 
   &.active {
@@ -17,10 +22,25 @@ const IconWrapper = styled(NavLink)`
     }
   }
 
-  svg:hover {
-    path {
-      fill: ${({ theme }) => theme.colors.highlight};
+  @media (hover: hover) {
+    svg:hover {
+      path {
+        fill: ${({ theme }) => theme.colors.highlight};
+      }
     }
+  }
+
+  @media (hover: none) {
+    svg:active {
+      path {
+        fill: ${({ theme }) => theme.colors.highlight};
+      }
+    }
+  }
+
+  @media ${media.mobile} {
+    width: 1rem;
+    height: 1rem;
   }
 `;
 
