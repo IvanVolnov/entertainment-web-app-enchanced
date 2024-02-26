@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { media } from '../../styles/Global';
 
-import dummyAvatar from '../../../public/assets/image-avatar.png';
+import dummyAvatar from '../../assets/image-avatar.png';
 
 const ImgWrapper = styled(Link)`
   width: 2.5rem;

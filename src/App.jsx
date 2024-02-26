@@ -6,6 +6,9 @@ import MoviesScreen from './pages/MoviesScreen';
 import SeriesScreen from './pages/SeriesScreen';
 import BookmarkedScreen from './pages/BookmarkedScreen';
 import Login from './pages/Login';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 const router = createBrowserRouter([
   {
@@ -23,6 +26,10 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />;
+    </QueryClientProvider>
+  );
 }
 export default App;
