@@ -28,6 +28,7 @@ ul {
 }
 body {
   font-family: "Outfit", sans-serif;
+  letter-spacing: -1;
   font-optical-sizing: auto;
   color: ${({ theme }) => theme.colors.text};
   font-style: normal;
@@ -35,6 +36,4 @@ body {
   min-height: 100svh;
   background-color: ${({ theme }) => theme.colors.background};
 }
-
-
 `;

@@ -6,7 +6,6 @@ import SeriesIcon from '../assets/icon-nav-tv-series.svg?react';
 import BookmarkIcon from '../assets/icon-nav-bookmark.svg?react';
 import Account from './UI/Account';
 import { Menu, Logo, NavBar } from './NavMenuStyles';
-import Switch from './UI/Switch';
 
 export default function NavMenu() {
   return (
