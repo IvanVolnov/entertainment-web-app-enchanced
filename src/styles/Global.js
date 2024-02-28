@@ -28,7 +28,7 @@ ul {
 }
 body {
   font-family: "Outfit", sans-serif;
-  letter-spacing: -1;
+  letter-spacing: -0.06rem;
   font-optical-sizing: auto;
   color: ${({ theme }) => theme.colors.text};
   font-style: normal;

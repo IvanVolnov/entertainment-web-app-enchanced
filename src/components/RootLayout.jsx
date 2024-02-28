@@ -10,6 +10,7 @@ const theme = {
     text: '#FFFFFF',
     highlight: '#FC4747',
     secondary: '#5A698F',
+    backdrop: '#00000092',
   },
 };
 
@@ -17,11 +18,16 @@ const Wrapper = styled.div`
   min-height: 100vh;
   min-height: 100svh;
   display: flex;
-  align-items: stretch;
+  gap: 2.25rem;
 
   @media ${media.tablet} {
     flex-direction: column;
     justify-items: stretch;
+    gap: 2.06rem;
+  }
+
+  @media ${media.mobile} {
+    gap: 1.5rem;
   }
 `;
 

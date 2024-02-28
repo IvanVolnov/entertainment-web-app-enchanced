@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { media } from '../styles/Global';
 
 export const Menu = styled.header`
-  margin: 2rem;
+  margin: 2rem 0rem 2rem 2rem;
   width: 6rem;
   max-height: 60rem;
   background-color: ${({ theme }) => theme.colors.backgroundLight};
@@ -31,6 +31,7 @@ export const Menu = styled.header`
     border-radius: 0px;
   }
 `;
+
 export const Logo = styled.img`
   overflow: clip;
   width: 2.06rem;
@@ -41,11 +42,12 @@ export const Logo = styled.img`
     height: 1.25rem;
   }
 `;
+
 export const NavBar = styled.nav`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
-  gap: 2.2rem;
+  gap: 2.5rem;
 
   @media ${media.tablet} {
     flex-direction: row;

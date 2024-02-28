@@ -2,11 +2,14 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchTernding } from '../http/http';
 import styled from 'styled-components';
 import Heading from './UI/Heading';
+import FilmCard from './UI/FilmCard';
 
 const Carousel = styled.ul`
   display: flex;
   gap: 2.5rem;
+  flex-wrap: wrap;
 `;
+
 export default function Trending() {
   const { data, isPending, isError, error } = useQuery({
     queryKey: ['trending'],
@@ -24,9 +27,28 @@ export default function Trending() {
   if (data) {
     trendingContent = (
       <Carousel>
-        {data.map((trend) => (
-          <li key={trend.id}>{trend.title || trend.name}</li>
-        ))}
+        {data.map(
+          ({
+            id,
+            name,
+            backdrop_path,
+            media_type,
+            first_air_date,
+            release_date,
+            original_title,
+            vote_average,
+          }) => (
+            <FilmCard
+              key={id}
+              score={vote_average}
+              cardMode='trending'
+              name={name || original_title}
+              backdrop={backdrop_path}
+              mediaType={media_type}
+              releaseDate={first_air_date || release_date}
+            />
+          )
+        )}
       </Carousel>
     );
   }
