@@ -8,6 +8,7 @@ const Carousel = styled.ul`
   display: flex;
   gap: 2.5rem;
   flex-wrap: wrap;
+  margin-top: 0.2rem;
 `;
 
 export default function Trending() {
