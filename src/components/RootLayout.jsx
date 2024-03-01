@@ -10,7 +10,7 @@ const theme = {
     text: '#FFFFFF',
     highlight: '#FC4747',
     secondary: '#5A698F',
-    backdrop: '#00000092',
+    backdrop: '#00000084',
   },
 };
 

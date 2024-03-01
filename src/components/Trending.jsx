@@ -42,7 +42,7 @@ export default function Trending() {
             <FilmCard
               key={id}
               score={vote_average}
-              cardMode='trending'
+              cardMode
               name={name || original_title}
               backdrop={backdrop_path}
               mediaType={media_type}

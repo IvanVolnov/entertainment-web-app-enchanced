@@ -9,6 +9,7 @@ const IconWrapper = styled(NavLink)`
   height: 1.25rem;
   cursor: pointer;
   align-content: center;
+
   svg {
     width: 100%;
     height: 100%;
@@ -26,6 +27,7 @@ const IconWrapper = styled(NavLink)`
     svg:hover {
       path {
         fill: ${({ theme }) => theme.colors.highlight};
+        transition: fill 0.3s ease;
       }
     }
   }
@@ -34,6 +36,7 @@ const IconWrapper = styled(NavLink)`
     svg:active {
       path {
         fill: ${({ theme }) => theme.colors.highlight};
+        transition: fill 0.3s ease;
       }
     }
   }

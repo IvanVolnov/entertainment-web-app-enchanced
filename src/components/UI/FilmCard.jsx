@@ -2,13 +2,12 @@ import styled from 'styled-components';
 
 import bookmarkEmpty from '../../assets/icon-bookmark-empty.svg';
 import bookmarkFull from '../../assets/icon-bookmark-full.svg';
-import MovieSvg from '../../assets/icon-category-movie.svg?react';
-import TvSvg from '../../assets/icon-category-tv.svg?react';
-
+import tvSvg from '../../assets/icon-category-tv.svg';
 import movieSvg from '../../assets/icon-category-movie.svg';
 
 const Card = styled.li`
-  width: 29.38rem;
+  /* FIX This */
+  width: ${(props) => (props.$mode === 'standard' ? '19.38rem' : '29.38rem')};
   height: 14.38rem;
 
   display: grid;
@@ -29,6 +28,11 @@ const BookmarkBtn = styled.a`
   background-repeat: no-repeat;
   background-position: center;
   border-radius: 50%;
+  transition: filter 0.5s ease;
+
+  &:hover {
+    filter: invert(1);
+  }
 `;
 
 const Name = styled.h2`
@@ -38,6 +42,7 @@ const Name = styled.h2`
 const Info = styled.div`
   width: fit-content;
   height: fit-content;
+  margin-left: 1rem;
   padding: 0.5rem;
   grid-column: 1/3;
   grid-row: 2/3;
@@ -62,11 +67,12 @@ const Char = styled.div`
   font-size: 0.94rem;
   font-weight: 200;
 
-  div {
-    display: flex;
+  img {
+    margin-right: 0.2rem;
   }
 
-  :nth-child(n + 2)::before {
+  > p:nth-child(n + 2)::before,
+  > span:nth-child(n + 2)::before {
     content: '·';
     padding-right: 0.5em;
   }
@@ -74,7 +80,7 @@ const Char = styled.div`
 
 export default function FilmCard({
   bookmarked = false,
-  cardMode,
+  cardMode = 'standard',
   name,
   backdrop,
   mediaType,
@@ -84,19 +90,20 @@ export default function FilmCard({
   const formattedDate = new Date(releaseDate);
 
   return (
-    <Card>
+    <Card $mode={cardMode}>
       <Cover $image={`https://image.tmdb.org/t/p/w780/${backdrop}`} />
-      <Info>
+      <Info $mode={cardMode}>
         <Char>
           <p>{formattedDate.getFullYear()}</p>
           {mediaType === 'movie' ? (
-            <div>
-              <img src={movieSvg} /> <p>Movies</p>
-            </div>
+            <p>
+              <img src={movieSvg} />
+              <span>Movie</span>
+            </p>
           ) : (
-            <>
-              <TvSvg /> <p>TV Series</p>
-            </>
+            <p>
+              <img src={tvSvg} /> <span>TV Series</span>
+            </p>
           )}
           <p>{score.toFixed(1)}</p>
         </Char>
