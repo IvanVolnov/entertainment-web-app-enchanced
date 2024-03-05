@@ -6,16 +6,15 @@ import tvSvg from '../../assets/icon-category-tv.svg';
 import movieSvg from '../../assets/icon-category-movie.svg';
 
 const Card = styled.li`
-  /* FIX This */
-  width: ${(props) => (props.$mode === 'standard' ? '19.38rem' : '29.38rem')};
-  height: 14.38rem;
-
+  width: ${(props) => (props.$mode === 'standard' ? '17.5rem' : '29.38rem')};
+  height: ${(props) => (props.$mode === 'standard' ? '14.13rem' : '14.38rem')};
   display: grid;
   grid-template:
     'a b'
     'c d';
   grid-template-columns: 1fr 3.5rem;
-  grid-template-rows: 1fr 6.25rem;
+  grid-template-rows: ${(props) =>
+    props.$mode === 'standard' ? '1fr 3.25rem' : '1fr 6.25rem'};
 `;
 
 const BookmarkBtn = styled.a`
@@ -35,28 +34,34 @@ const BookmarkBtn = styled.a`
   }
 `;
 
-const Name = styled.h2`
-  font-weight: 300;
-`;
-
 const Info = styled.div`
   width: fit-content;
   height: fit-content;
-  margin-left: 1rem;
-  padding: 0.5rem;
-  grid-column: 1/3;
-  grid-row: 2/3;
-  align-self: center;
+  margin: ${(props) =>
+    props.$mode === 'standard' ? '0rem' : '0rem 0rem 0rem 1rem'};
+  padding: ${(props) => (props.$mode === 'standard' ? '0rem' : '0.5rem')};
+  grid-area: 2/1/3/3;
+  align-self: ${(props) => (props.$mode === 'standard' ? 'end' : 'center')};
   display: flex;
   flex-direction: column;
-  background-color: ${({ theme }) => theme.colors.backdrop};
+  background-color: ${(props) =>
+    props.$mode === 'standard'
+      ? 'unset'
+      : ({ theme }) => theme.colors.backdrop};
   border-radius: 10px;
+
+  h2 {
+    font-weight: 300;
+    font-size: ${(props) =>
+      props.$mode === 'standard' ? '1.12rem;' : '1.88rem'};
+  }
 `;
 
 const Cover = styled.div`
-  grid-area: 1/1/3/3;
+  grid-area: ${(props) => (props.$mode === 'standard' ? '1/1/2/3' : '1/1/3/3')};
   background-image: url(${(props) => props.$image});
   background-size: cover;
+  background-position: top;
   border-radius: 10px;
 `;
 
@@ -64,7 +69,7 @@ const Char = styled.div`
   display: flex;
   gap: 0.5rem;
   flex-grow: 1;
-  font-size: 0.94rem;
+  font-size: ${(props) => (props.$mode === 'standard' ? '0.81rem' : '0.94rem')};
   font-weight: 200;
 
   img {
@@ -80,7 +85,7 @@ const Char = styled.div`
 
 export default function FilmCard({
   bookmarked = false,
-  cardMode = 'standard',
+  cardMode,
   name,
   backdrop,
   mediaType,
@@ -91,7 +96,10 @@ export default function FilmCard({
 
   return (
     <Card $mode={cardMode}>
-      <Cover $image={`https://image.tmdb.org/t/p/w780/${backdrop}`} />
+      <Cover
+        $mode={cardMode}
+        $image={`https://image.tmdb.org/t/p/w780/${backdrop}`}
+      />
       <Info $mode={cardMode}>
         <Char>
           <p>{formattedDate.getFullYear()}</p>
@@ -107,7 +115,7 @@ export default function FilmCard({
           )}
           <p>{score.toFixed(1)}</p>
         </Char>
-        <Name>{name}</Name>
+        <h2>{name}</h2>
       </Info>
       <BookmarkBtn
         $image={bookmarked ? bookmarkFull : bookmarkEmpty}

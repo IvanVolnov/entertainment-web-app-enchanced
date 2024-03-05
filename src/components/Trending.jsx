@@ -5,10 +5,18 @@ import Heading from './UI/Heading';
 import FilmCard from './UI/FilmCard';
 
 const Carousel = styled.ul`
-  display: flex;
+  display: grid;
   gap: 2.5rem;
-  flex-wrap: wrap;
+  grid-auto-flow: column;
+  grid-template-columns: max-content;
   margin-top: 0.2rem;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-snap-type: inline mandatory;
+
+  li {
+    scroll-snap-align: start;
+  }
 `;
 
 export default function Trending() {
@@ -42,7 +50,7 @@ export default function Trending() {
             <FilmCard
               key={id}
               score={vote_average}
-              cardMode
+              cardMode='trending'
               name={name || original_title}
               backdrop={backdrop_path}
               mediaType={media_type}
