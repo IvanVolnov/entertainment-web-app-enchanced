@@ -10,7 +10,7 @@ const Carousel = styled.ul`
   grid-auto-flow: column;
   grid-template-columns: max-content;
   margin-top: 0.2rem;
-  overflow-x: auto;
+  overflow: hidden;
   overscroll-behavior-inline: contain;
   scroll-snap-type: inline mandatory;
 
