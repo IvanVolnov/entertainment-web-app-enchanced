@@ -1,3 +1,5 @@
+import { json } from 'react-router-dom';
+
 export async function fetchTernding({ signal, searchTerm }) {
   const options = {
     method: 'GET',
@@ -17,7 +19,7 @@ export async function fetchTernding({ signal, searchTerm }) {
   const response = await fetch(url, options);
 
   if (!response.ok) {
-    throw new Error('error!');
+    return json({ message: 'could not fetch events' }, { status: 500 });
   }
   const { results } = await response.json();
   const filteredRes = results

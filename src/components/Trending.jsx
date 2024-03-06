@@ -1,18 +1,21 @@
 import { useQuery } from '@tanstack/react-query';
-import { fetchTernding } from '../http/http';
 import styled from 'styled-components';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+
+import { fetchTernding } from '../http/http';
 import Heading from './UI/Heading';
 import FilmCard from './UI/FilmCard';
 
-const Carousel = styled.ul`
-  display: grid;
+const Carousel = styled.div`
+  display: flex;
   gap: 2.5rem;
-  grid-auto-flow: column;
-  grid-template-columns: max-content;
+  /* grid-auto-flow: column;
+  grid-template-columns: max-content; */
   margin-top: 0.2rem;
-  overflow: hidden;
-  overscroll-behavior-inline: contain;
-  scroll-snap-type: inline mandatory;
+  /* overflow: auto; */
+  /* overscroll-behavior-inline: contain;
+  scroll-snap-type: inline mandatory; */
 
   li {
     scroll-snap-align: start;
@@ -36,28 +39,32 @@ export default function Trending() {
   if (data) {
     trendingContent = (
       <Carousel>
-        {data.map(
-          ({
-            id,
-            name,
-            backdrop_path,
-            media_type,
-            first_air_date,
-            release_date,
-            original_title,
-            vote_average,
-          }) => (
-            <FilmCard
-              key={id}
-              score={vote_average}
-              cardMode='trending'
-              name={name || original_title}
-              backdrop={backdrop_path}
-              mediaType={media_type}
-              releaseDate={first_air_date || release_date}
-            />
-          )
-        )}
+        <Swiper slidesPerView={'auto'} spaceBetween={40} grabCursor={true}>
+          {data.map(
+            ({
+              id,
+              name,
+              backdrop_path,
+              media_type,
+              first_air_date,
+              release_date,
+              original_title,
+              vote_average,
+            }) => (
+              <SwiperSlide key={id} style={{ width: 'auto' }}>
+                <FilmCard
+                  key={id}
+                  score={vote_average}
+                  cardMode='trending'
+                  name={name || original_title}
+                  backdrop={backdrop_path}
+                  mediaType={media_type}
+                  releaseDate={first_air_date || release_date}
+                />
+              </SwiperSlide>
+            )
+          )}
+        </Swiper>
       </Carousel>
     );
   }

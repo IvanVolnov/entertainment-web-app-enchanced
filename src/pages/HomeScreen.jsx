@@ -4,7 +4,7 @@ import Trending from '../components/Trending';
 import Search from '../components/UI/Search';
 
 const PageWrapper = styled.main`
-  width: 80%;
+  max-width: calc(100% - 10.25rem);
   margin-top: 4rem;
   gap: 2rem;
   display: flex;
