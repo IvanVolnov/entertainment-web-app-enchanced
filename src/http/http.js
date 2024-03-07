@@ -1,6 +1,4 @@
-import { json } from 'react-router-dom';
-
-export async function fetchTernding({ signal, searchTerm }) {
+export async function fetchTernding({ searchTerm }) {
   const options = {
     method: 'GET',
     headers: {
@@ -8,7 +6,6 @@ export async function fetchTernding({ signal, searchTerm }) {
       Authorization:
         'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxOWJkZTM0YTFiMTUxN2Q4MmI1NmNkNTRhYjQ4MzE5YSIsInN1YiI6IjY1ZDIzMzE3NDFlZWUxMDE3YzBhMDZkZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QamWrj0r0wIujQVEuy1yJpHirM6H2uE2x4oUucyUg1Q',
     },
-    // signal: signal,
   };
   let url = 'https://api.themoviedb.org/3/trending/all/day?language=en-US';
 
@@ -19,7 +16,13 @@ export async function fetchTernding({ signal, searchTerm }) {
   const response = await fetch(url, options);
 
   if (!response.ok) {
-    return json({ message: 'could not fetch events' }, { status: 500 });
+    const error = new Error(
+      'An error occurred while fetching the the trending data'
+    );
+    error.code = response.status;
+    error.info = await response.json();
+
+    throw error;
   }
   const { results } = await response.json();
   const filteredRes = results
@@ -29,4 +32,29 @@ export async function fetchTernding({ signal, searchTerm }) {
     .slice(0, 10);
   console.log(filteredRes);
   return filteredRes;
+}
+
+export async function fetchDataList({ type = 'movie', page = 1 }) {
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization:
+        'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxOWJkZTM0YTFiMTUxN2Q4MmI1NmNkNTRhYjQ4MzE5YSIsInN1YiI6IjY1ZDIzMzE3NDFlZWUxMDE3YzBhMDZkZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QamWrj0r0wIujQVEuy1yJpHirM6H2uE2x4oUucyUg1Q',
+    },
+  };
+  let url = `https://api.themoviedb.org/3/${type}/popular?language=en-US&page=${page}`;
+
+  const response = await fetch(url, options);
+
+  if (!response.ok) {
+    const error = new Error('An error occurred while fetching data');
+    error.code = response.status;
+    error.info = await response.json();
+    throw error;
+  }
+  const { results } = await response.json();
+
+  console.log(results);
+  return results;
 }

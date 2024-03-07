@@ -31,13 +31,23 @@ const Wrapper = styled.div`
   }
 `;
 
+const PageWrapper = styled.main`
+  max-width: calc(100% - 10.25rem);
+  margin-top: 4rem;
+  gap: 2rem;
+  display: flex;
+  flex-direction: column;
+`;
+
 export default function RootLayout() {
   return (
     <Wrapper>
       <ThemeProvider theme={theme}>
         <GlobalStyles />
         <NavMenu />
-        <Outlet />
+        <PageWrapper>
+          <Outlet />
+        </PageWrapper>
       </ThemeProvider>
     </Wrapper>
   );

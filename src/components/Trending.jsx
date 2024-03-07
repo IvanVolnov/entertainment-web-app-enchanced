@@ -6,20 +6,12 @@ import 'swiper/css';
 import { fetchTernding } from '../http/http';
 import Heading from './UI/Heading';
 import FilmCard from './UI/FilmCard';
+import Error from './UI/Error';
 
 const Carousel = styled.div`
   display: flex;
   gap: 2.5rem;
-  /* grid-auto-flow: column;
-  grid-template-columns: max-content; */
   margin-top: 0.2rem;
-  /* overflow: auto; */
-  /* overscroll-behavior-inline: contain;
-  scroll-snap-type: inline mandatory; */
-
-  li {
-    scroll-snap-align: start;
-  }
 `;
 
 export default function Trending() {
@@ -34,8 +26,11 @@ export default function Trending() {
     trendingContent = <p>Loading...</p>;
   }
   if (isError) {
-    trendingContent = <p>{error}</p>;
+    trendingContent = (
+      <Error error={error} backdrop='failed to fetch trending data' />
+    );
   }
+
   if (data) {
     trendingContent = (
       <Carousel>
