@@ -12,6 +12,7 @@ const Carousel = styled.div`
   display: flex;
   gap: 2.5rem;
   margin-top: 0.2rem;
+  margin-bottom: 0.38rem;
 `;
 
 export default function Trending() {

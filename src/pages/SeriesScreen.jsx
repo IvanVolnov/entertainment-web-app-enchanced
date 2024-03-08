@@ -1,3 +1,11 @@
+import Search from '../components/UI/Search';
+import MainContent from '../components/MainContent';
+
 export default function SeriesScreen() {
-  return <h1>SeriesScreen</h1>;
+  return (
+    <>
+      <Search />
+      <MainContent heading='TV Series' mode='tv' />
+    </>
+  );
 }

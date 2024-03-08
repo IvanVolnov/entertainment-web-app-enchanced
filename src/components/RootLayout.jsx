@@ -18,6 +18,8 @@ const Wrapper = styled.div`
   min-height: 100vh;
   min-height: 100svh;
   display: flex;
+  justify-content: center;
+
   gap: 2.25rem;
 
   @media ${media.tablet} {
@@ -32,7 +34,8 @@ const Wrapper = styled.div`
 `;
 
 const PageWrapper = styled.main`
-  max-width: calc(100% - 10.25rem);
+  width: min(100% - 10.25rem, 163rem);
+
   margin-top: 4rem;
   gap: 2rem;
   display: flex;
