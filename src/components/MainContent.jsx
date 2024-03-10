@@ -2,7 +2,6 @@ import { useInfiniteQuery, useQuery } from '@tanstack/react-query';
 
 import { fetchDataList } from '../http/http';
 import Error from '../components/UI/Error';
-import Search from '../components/UI/Search';
 import Heading from '../components/UI/Heading';
 import FilmCard from '../components/UI/FilmCard';
 import styled from 'styled-components';
@@ -15,8 +14,8 @@ const FilmGrid = styled.div`
 
 export default function MainContent({ heading, mode }) {
   const { data, isPending, isError, error } = useQuery({
-    queryKey: ['movies'],
-    queryFn: fetchDataList,
+    queryKey: ['movies', { mode: 'movie' }],
+    queryFn: () => fetchDataList({ mode }),
   });
 
   let content;

@@ -34,7 +34,7 @@ export async function fetchTernding({ searchTerm }) {
   return filteredRes;
 }
 
-export async function fetchDataList({ type = 'movie', page = 1 }) {
+export async function fetchDataList({ type, page = 1 }) {
   const options = {
     method: 'GET',
     headers: {
