@@ -30,12 +30,11 @@ export async function fetchTernding({ searchTerm }) {
       return b.popularity - a.popularity;
     })
     .slice(0, 10);
-  console.log(filteredRes);
   return filteredRes;
 }
 
-export async function fetchDataList({ type, page = 1 }) {
-  console.log(type, page);
+export async function fetchDataList({ queryKey, pageParam }) {
+  // console.log(queryKey[1].type, pageParam);
   const options = {
     method: 'GET',
     headers: {
@@ -45,11 +44,12 @@ export async function fetchDataList({ type, page = 1 }) {
     },
   };
   let url;
+  const type = queryKey[1].type;
 
-  url = `https://api.themoviedb.org/3/${type}/popular?language=en-US&page=${page}`;
+  url = `https://api.themoviedb.org/3/${type}/popular?language=en-US&page=${pageParam}`;
 
   if (type === 'mixed') {
-    url = `https://api.themoviedb.org/3/trending/all/week?language=en-US&page=${page}`;
+    url = `https://api.themoviedb.org/3/trending/all/week?language=en-US&page=${pageParam}`;
   }
   const response = await fetch(url, options);
 
@@ -59,10 +59,8 @@ export async function fetchDataList({ type, page = 1 }) {
     error.info = await response.json();
     throw error;
   }
-  const { results } = await response.json();
+  const result = await response.json();
 
-  console.log(results);
-  return results;
+  // console.log(result);
+  return result;
 }
-
-// test commit

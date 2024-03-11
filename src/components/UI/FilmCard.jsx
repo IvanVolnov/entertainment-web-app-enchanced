@@ -2,9 +2,11 @@ import bookmarkEmpty from '../../assets/icon-bookmark-empty.svg';
 import bookmarkFull from '../../assets/icon-bookmark-full.svg';
 import tvSvg from '../../assets/icon-category-tv.svg';
 import movieSvg from '../../assets/icon-category-movie.svg';
+
 import { Card, Cover, Info, Char, BookmarkBtn } from './FilmCardStyles';
 
 export default function FilmCard({
+  innerRef,
   bookmarked = false,
   cardMode,
   name,
@@ -13,17 +15,19 @@ export default function FilmCard({
   releaseDate,
   score,
 }) {
-  const formattedDate = new Date(releaseDate);
+  const formattedDate = releaseDate ? new Date(releaseDate) : undefined;
 
   return (
-    <Card $mode={cardMode}>
+    <Card $mode={cardMode} ref={innerRef}>
       <Cover
         $mode={cardMode}
-        $image={`https://image.tmdb.org/t/p/w780/${backdrop}`}
+        $image={
+          backdrop ? `https://image.tmdb.org/t/p/w780/${backdrop}` : undefined
+        }
       />
       <Info $mode={cardMode}>
         <Char>
-          <p>{formattedDate.getFullYear()}</p>
+          <p>{formattedDate?.getFullYear()}</p>
           {mediaType === 'movie' ? (
             <p>
               <img src={movieSvg} />
@@ -34,7 +38,7 @@ export default function FilmCard({
               <img src={tvSvg} /> <span>TV Series</span>
             </p>
           )}
-          <p>{score.toFixed(1)}</p>
+          <p>{score?.toFixed(1)}</p>
         </Char>
         <h2>{name}</h2>
       </Info>

@@ -7,6 +7,7 @@ import { fetchTernding } from '../http/http';
 import Heading from './UI/Heading';
 import FilmCard from './UI/FilmCard';
 import Error from './UI/Error';
+import { Loading } from './UI/Loading';
 
 const Carousel = styled.div`
   display: flex;
@@ -24,7 +25,7 @@ export default function Trending() {
   let trendingContent;
 
   if (isPending) {
-    trendingContent = <p>Loading...</p>;
+    trendingContent = <Loading />;
   }
   if (isError) {
     trendingContent = (

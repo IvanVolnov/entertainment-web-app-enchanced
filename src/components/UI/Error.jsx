@@ -3,6 +3,7 @@ import styled from 'styled-components';
 const StyledError = styled.div`
   height: clamp(3rem, 100%, 20rem);
   width: clamp(3rem, 100%, 30rem);
+  padding: 1rem;
   background-color: ${({ theme }) => theme.colors.highlight};
   font-size: 1.2rem;
   display: flex;

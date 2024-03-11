@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import noImgSvg from '../../assets/no-image.svg';
 
 export const Card = styled.div`
   width: ${(props) => (props.$mode === 'standard' ? '17.5rem' : '29.38rem')};
@@ -9,7 +10,9 @@ export const Card = styled.div`
     'c d';
   grid-template-columns: 1fr 3.5rem;
   grid-template-rows: ${(props) =>
-    props.$mode === 'standard' ? '1fr 3.25rem' : '1fr 6.25rem'};
+    props.$mode === 'standard'
+      ? '1fr minmax(3.25rem, max-content)'
+      : '1fr minmax(6.25rem, max-content)'};
 `;
 export const BookmarkBtn = styled.a`
   cursor: default;
@@ -52,8 +55,9 @@ export const Info = styled.div`
 `;
 export const Cover = styled.div`
   grid-area: ${(props) => (props.$mode === 'standard' ? '1/1/2/3' : '1/1/3/3')};
-  background-image: url(${(props) => props.$image});
-  background-size: cover;
+  background-image: url(${(props) => (props.$image ? props.$image : noImgSvg)});
+  background-size: ${(props) => (props.$image ? 'cover' : 'contain')};
+  background-repeat: ${(props) => (props.$image ? 'repeat' : 'no-repeat')};
   background-position: top;
   border-radius: 10px;
 `;
