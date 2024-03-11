@@ -35,6 +35,7 @@ export async function fetchTernding({ searchTerm }) {
 }
 
 export async function fetchDataList({ type, page = 1 }) {
+  console.log(type, page);
   const options = {
     method: 'GET',
     headers: {
@@ -43,8 +44,13 @@ export async function fetchDataList({ type, page = 1 }) {
         'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxOWJkZTM0YTFiMTUxN2Q4MmI1NmNkNTRhYjQ4MzE5YSIsInN1YiI6IjY1ZDIzMzE3NDFlZWUxMDE3YzBhMDZkZCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QamWrj0r0wIujQVEuy1yJpHirM6H2uE2x4oUucyUg1Q',
     },
   };
-  let url = `https://api.themoviedb.org/3/${type}/popular?language=en-US&page=${page}`;
+  let url;
 
+  url = `https://api.themoviedb.org/3/${type}/popular?language=en-US&page=${page}`;
+
+  if (type === 'mixed') {
+    url = `https://api.themoviedb.org/3/trending/all/week?language=en-US&page=${page}`;
+  }
   const response = await fetch(url, options);
 
   if (!response.ok) {

@@ -14,8 +14,11 @@ const FilmGrid = styled.div`
 
 export default function MainContent({ heading, mode }) {
   const { data, isPending, isError, error } = useQuery({
-    queryKey: ['movies', { mode: 'movie' }],
-    queryFn: () => fetchDataList({ mode }),
+    queryKey: ['movies', { type: mode }],
+    queryFn: () => fetchDataList({ type: mode }),
+    initialPageParam: 1,
+    getNextPageParam: () =>
+      fetchDataList({ type: mode, page: initialPageParam }),
   });
 
   let content;
@@ -46,7 +49,7 @@ export default function MainContent({ heading, mode }) {
               cardMode='standard'
               name={name || original_title}
               backdrop={backdrop_path}
-              mediaType={'movie'}
+              mediaType={name ? 'tv' : 'movie'}
               releaseDate={first_air_date || release_date}
             />
           )
