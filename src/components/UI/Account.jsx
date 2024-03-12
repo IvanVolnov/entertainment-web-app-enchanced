@@ -1,10 +1,9 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 import { media } from '../../styles/Global';
 
 import dummyAvatar from '../../assets/image-avatar.png';
 
-const ImgWrapper = styled(Link)`
+const ImgWrapper = styled.a`
   width: 2.5rem;
   height: 2.5rem;
 
@@ -29,7 +28,7 @@ const AvatarImage = styled.img`
 
 export default function Account() {
   return (
-    <ImgWrapper to='/login'>
+    <ImgWrapper>
       <AvatarImage src={dummyAvatar} alt='avatar image' />
     </ImgWrapper>
   );

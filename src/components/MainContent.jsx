@@ -41,10 +41,9 @@ export default function MainContent({ heading, mode }) {
 
   useEffect(() => {
     if (inView && hasNextPage) {
-      console.log('fire');
       fetchNextPage();
     }
-  }, [inView, hasNextPage]);
+  }, [inView, hasNextPage, fetchNextPage]);
 
   if (status === 'pending') {
     content = <Loading />;
@@ -54,7 +53,6 @@ export default function MainContent({ heading, mode }) {
   }
 
   if (data) {
-    // console.log(data, 'data sent to compontent');
     content = (
       <>
         {data.pages.map((el) =>
@@ -94,9 +92,6 @@ export default function MainContent({ heading, mode }) {
         {content}
         {isFetchingNextPage && <Loading />}
       </FilmGrid>
-      {/* <button ref={ref} onClick={() => fetchNextPage()}>
-        load more
-      </button> */}
     </>
   );
 }
