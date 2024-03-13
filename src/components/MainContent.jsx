@@ -18,7 +18,7 @@ const FilmGrid = styled.div`
   }
 `;
 
-export default function MainContent({ heading, mode }) {
+export default function MainContent({ heading, mode, searchTerm = undefined }) {
   const { ref, inView } = useInView();
   const {
     data,
@@ -28,7 +28,7 @@ export default function MainContent({ heading, mode }) {
     isFetchingNextPage,
     hasNextPage,
   } = useInfiniteQuery({
-    queryKey: ['movies', { type: mode }],
+    queryKey: ['movies', { type: mode, searchTerm: searchTerm }],
     queryFn: fetchDataList,
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {

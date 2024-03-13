@@ -1,4 +1,4 @@
-export async function fetchTernding({ searchTerm }) {
+export async function fetchTernding() {
   const options = {
     method: 'GET',
     headers: {
@@ -8,10 +8,6 @@ export async function fetchTernding({ searchTerm }) {
     },
   };
   let url = 'https://api.themoviedb.org/3/trending/all/day?language=en-US';
-
-  if (searchTerm) {
-    url += '?search=' + searchTerm;
-  } // добавляем парамет searchTerm для того чтобы передать данные для поиска на бэк
 
   const response = await fetch(url, options);
 
@@ -34,7 +30,7 @@ export async function fetchTernding({ searchTerm }) {
 }
 
 export async function fetchDataList({ queryKey, pageParam }) {
-  // console.log(queryKey[1].type, pageParam);
+  console.log(queryKey);
   const options = {
     method: 'GET',
     headers: {
@@ -45,12 +41,19 @@ export async function fetchDataList({ queryKey, pageParam }) {
   };
   let url;
   const type = queryKey[1].type;
+  const query = queryKey[1].searchTerm;
 
   url = `https://api.themoviedb.org/3/${type}/popular?language=en-US&page=${pageParam}`;
 
-  if (type === 'mixed') {
+  if (query) {
+    url = `https://api.themoviedb.org/3/search/${type}?query=${query}&include_adult=false&language=en-US&page=${pageParam}`;
+  }
+
+  if (type === 'multi' && !query) {
     url = `https://api.themoviedb.org/3/trending/all/week?language=en-US&page=${pageParam}`;
   }
+  console.log(type);
+  console.log(url);
   const response = await fetch(url, options);
 
   if (!response.ok) {
@@ -60,7 +63,18 @@ export async function fetchDataList({ queryKey, pageParam }) {
     throw error;
   }
   const result = await response.json();
-
   // console.log(result);
+
+  if (query) {
+    let filteredResult = result;
+    filteredResult.results = filteredResult.results
+      .filter((el) => el.media_type !== 'person')
+      .sort((a, b) => {
+        return b.popularity - a.popularity;
+      });
+    // console.log(filteredResult);
+    return filteredResult;
+  }
+
   return result;
 }

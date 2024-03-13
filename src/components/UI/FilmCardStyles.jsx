@@ -15,7 +15,7 @@ export const Card = styled.div`
       : '1fr minmax(6.25rem, max-content)'};
 `;
 export const BookmarkBtn = styled.a`
-  cursor: default;
+  cursor: pointer;
   width: 2rem;
   height: 2rem;
   margin-top: 1rem;

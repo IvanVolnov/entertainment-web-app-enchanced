@@ -1,4 +1,4 @@
-import Search from '../components/UI/Search';
+import Search from '../components/Search';
 
 import MainContent from '../components/MainContent';
 
