@@ -30,7 +30,7 @@ export async function fetchTernding() {
 }
 
 export async function fetchDataList({ queryKey, pageParam }) {
-  console.log(queryKey);
+  // console.log(queryKey);
   const options = {
     method: 'GET',
     headers: {
@@ -52,8 +52,8 @@ export async function fetchDataList({ queryKey, pageParam }) {
   if (type === 'multi' && !query) {
     url = `https://api.themoviedb.org/3/trending/all/week?language=en-US&page=${pageParam}`;
   }
-  console.log(type);
-  console.log(url);
+  // console.log(type);
+  // console.log(url);
   const response = await fetch(url, options);
 
   if (!response.ok) {

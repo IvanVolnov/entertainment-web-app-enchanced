@@ -85,6 +85,7 @@ export default function MainContent({ heading, mode, searchTerm = undefined }) {
       </>
     );
   }
+
   return (
     <>
       <Heading>{heading}</Heading>

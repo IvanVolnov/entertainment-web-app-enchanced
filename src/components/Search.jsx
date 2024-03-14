@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 import searchIcon from '../assets/icon-search.svg';
 import MainContent from './MainContent';
@@ -26,7 +26,8 @@ const Input = styled.input`
 `;
 
 export default function Search() {
-  const [query, setQuery] = useState('');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const query = searchParams.get('query');
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -34,7 +35,7 @@ export default function Search() {
     const formData = new FormData(event.target);
     const data = Object.fromEntries(formData);
 
-    setQuery(data.query);
+    setSearchParams({ query: data.query });
   }
   return (
     <>
@@ -42,9 +43,6 @@ export default function Search() {
         <SearchBtn type='submit' $image={searchIcon} />
         <Input name='query' />
       </Form>
-      {query && (
-        <MainContent heading='Movies' mode='multi' searchTerm={query} />
-      )}
     </>
   );
 }
