@@ -1,13 +1,14 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
 import styled from 'styled-components';
+import { useSearchParams } from 'react-router-dom';
 
 import { fetchDataList } from '../http/http';
 import Error from '../components/UI/Error';
 import Heading from '../components/UI/Heading';
 import FilmCard from '../components/UI/FilmCard';
 import { Loading } from './UI/Loading';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const FilmGrid = styled.div`
   display: grid;
@@ -20,6 +21,9 @@ const FilmGrid = styled.div`
 
 export default function MainContent({ heading, mode, searchTerm = undefined }) {
   const { ref, inView } = useInView();
+  const [searchParams] = useSearchParams();
+  searchTerm = searchParams.get('query');
+
   const {
     data,
     status,
@@ -32,18 +36,22 @@ export default function MainContent({ heading, mode, searchTerm = undefined }) {
     queryFn: fetchDataList,
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
-      const nextPage = lastPage.page + 1 != 500 ? lastPage.page + 1 : undefined;
+      let nextPage = lastPage.page + 1 != 500 ? lastPage.page + 1 : undefined;
       return nextPage;
     },
   });
 
   let content;
+  const [quantity, setQuantity] = useState(0);
 
   useEffect(() => {
     if (inView && hasNextPage) {
       fetchNextPage();
     }
-  }, [inView, hasNextPage, fetchNextPage]);
+    if (data) {
+      setQuantity(data.pages[0].total_results);
+    }
+  }, [inView, hasNextPage, fetchNextPage, data]);
 
   if (status === 'pending') {
     content = <Loading />;
@@ -53,6 +61,7 @@ export default function MainContent({ heading, mode, searchTerm = undefined }) {
   }
 
   if (data) {
+    console.log(data, data.pages[0].total_results);
     content = (
       <>
         {data.pages.map((el) =>
@@ -88,7 +97,9 @@ export default function MainContent({ heading, mode, searchTerm = undefined }) {
 
   return (
     <>
-      <Heading>{heading}</Heading>
+      <Heading>
+        {searchTerm ? `Found ${quantity} results for ‘${searchTerm}’` : heading}
+      </Heading>
       <FilmGrid>
         {content}
         {isFetchingNextPage && <Loading />}

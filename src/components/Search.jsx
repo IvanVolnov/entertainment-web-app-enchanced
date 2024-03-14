@@ -27,7 +27,6 @@ const Input = styled.input`
 
 export default function Search() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const query = searchParams.get('query');
 
   function handleSubmit(event) {
     event.preventDefault();
