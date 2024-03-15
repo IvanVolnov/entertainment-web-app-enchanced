@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import { useSearchParams } from 'react-router-dom';
 
 import searchIcon from '../assets/icon-search.svg';
-import MainContent from './MainContent';
 
 const Form = styled.form`
   display: flex;
@@ -26,6 +25,7 @@ const Input = styled.input`
 `;
 
 export default function Search() {
+  // eslint-disable-next-line no-unused-vars
   const [searchParams, setSearchParams] = useSearchParams();
 
   function handleSubmit(event) {

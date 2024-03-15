@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import noImgSvg from '../../assets/no-image.svg';
+import { Loading } from './Loading';
 
 export const Card = styled.div`
   width: ${(props) => (props.$mode === 'standard' ? '17.5rem' : '29.38rem')};
@@ -77,4 +78,8 @@ export const Char = styled.div`
     content: '·';
     padding-right: 0.5em;
   }
+`;
+
+export const CoverLoading = styled(Loading)`
+  grid-area: ${(props) => (props.$mode === 'standard' ? '1/1/2/3' : '1/1/3/3')};
 `;

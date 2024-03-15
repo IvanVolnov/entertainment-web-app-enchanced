@@ -44,15 +44,6 @@ export default function MainContent({ heading, mode, searchTerm = undefined }) {
   let content;
   const [quantity, setQuantity] = useState(0);
 
-  useEffect(() => {
-    if (inView && hasNextPage) {
-      fetchNextPage();
-    }
-    if (data) {
-      setQuantity(data.pages[0].total_results);
-    }
-  }, [inView, hasNextPage, fetchNextPage, data]);
-
   if (status === 'pending') {
     content = <Loading />;
   }
@@ -61,7 +52,7 @@ export default function MainContent({ heading, mode, searchTerm = undefined }) {
   }
 
   if (data) {
-    console.log(data, data.pages[0].total_results);
+    // console.log(data, data.pages[0].total_pages);
     content = (
       <>
         {data.pages.map((el) =>
@@ -95,6 +86,18 @@ export default function MainContent({ heading, mode, searchTerm = undefined }) {
     );
   }
 
+  useEffect(() => {
+    if (
+      inView &&
+      hasNextPage &&
+      data.pageParams.length <= data.pages[0].total_pages
+    ) {
+      fetchNextPage();
+    }
+    if (data) {
+      setQuantity(data.pages[0].total_results);
+    }
+  }, [inView, hasNextPage, fetchNextPage, data]);
   return (
     <>
       <Heading>
