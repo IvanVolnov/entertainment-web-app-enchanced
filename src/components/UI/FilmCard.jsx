@@ -12,26 +12,49 @@ import {
 } from './FilmCardStyles';
 
 import { useState, useRef, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { addBookmark, removeBookmark } from '../../store/store';
 
 export default function FilmCard({
   innerRef,
-  bookmarked = false,
+  fromSaved,
   cardMode,
   name,
   backdrop,
   mediaType,
   releaseDate,
   score,
+  id,
 }) {
   const formattedDate = releaseDate ? new Date(releaseDate) : undefined;
   const [showCover, setShowCover] = useState(false);
+  const [bookmarked, setBookmarked] = useState(fromSaved ? true : false);
   const coverRef = useRef(null);
+  const dispatch = useDispatch();
+
+  function bookmarkBtnHandler() {
+    const filmData = {
+      name,
+      backdrop_path: backdrop,
+      type: mediaType,
+      first_air_date: releaseDate,
+      score,
+      id,
+    };
+    if (!bookmarked) {
+      dispatch(addBookmark(filmData));
+    }
+    if (bookmarked) {
+      dispatch(removeBookmark(id));
+    }
+    setBookmarked((prev) => !prev);
+  }
 
   useEffect(() => {
     const options = {
       root: null,
-      rootMargin: '0px',
-      threshold: 1,
+      rootMargin: '50px',
+      threshold: 0,
     };
 
     const observer = new IntersectionObserver((entries) => {
@@ -67,7 +90,7 @@ export default function FilmCard({
         <CoverLoading $mode={cardMode} />
       )}
 
-      <Info $mode={cardMode}>
+      <Info $mode={cardMode} ref={coverRef}>
         <Char>
           <p>{formattedDate?.getFullYear()}</p>
           {mediaType === 'movie' ? (
@@ -85,8 +108,8 @@ export default function FilmCard({
         <h2>{name}</h2>
       </Info>
       <BookmarkBtn
-        ref={coverRef}
         $image={bookmarked ? bookmarkFull : bookmarkEmpty}
+        onClick={bookmarkBtnHandler}
       ></BookmarkBtn>
     </Card>
   );

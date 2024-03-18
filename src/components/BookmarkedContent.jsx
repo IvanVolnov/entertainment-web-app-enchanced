@@ -1,14 +1,7 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
-import { useInView } from 'react-intersection-observer';
-import { useSearchParams } from 'react-router-dom';
 
-import { fetchDataList } from '../http/http';
-import Error from '../components/UI/Error';
-import Heading from '../components/UI/Heading';
+import { useSearchParams } from 'react-router-dom';
 import FilmCard from '../components/UI/FilmCard';
-import { Loading } from './UI/Loading';
 import { useEffect, useState } from 'react';
-import { FilmGrid } from './MainContentStyles';
 import { useSelector } from 'react-redux';
 
 export default function MainContent({
@@ -17,10 +10,8 @@ export default function MainContent({
   searchTerm = undefined,
   fromSaved = false,
 }) {
-  const { ref, inView } = useInView();
   const [searchParams] = useSearchParams();
   searchTerm = searchParams.get('query');
-  let content;
   const state = useSelector((state) => state);
   const [quantity, setQuantity] = useState(0);
 
@@ -54,51 +45,17 @@ export default function MainContent({
       )
     );
 
-  const {
-    data,
-    status,
-    error,
-    fetchNextPage,
-    isFetchingNextPage,
-    hasNextPage,
-  } = useInfiniteQuery({
-    queryKey: ['movies', { type: mode, searchTerm: searchTerm }],
-    queryFn: fetchDataList,
-    initialPageParam: 1,
-    getNextPageParam: (lastPage) => {
-      let nextPage = lastPage.page + 1 != 500 ? lastPage.page + 1 : undefined;
-      return nextPage;
-    },
-  });
+  
 
   useEffect(() => {
-    if (
-      !fromSaved &&
-      inView &&
-      hasNextPage &&
-      data.pageParams.length <= data.pages[0].total_pages
-    ) {
-      fetchNextPage();
     }
-    if (data && searchTerm) {
+    if (searchTerm) {
       setQuantity(data.pages[0].total_results);
     }
-  }, [inView, hasNextPage, fetchNextPage, data, searchTerm, fromSaved]);
+  }, [ data, searchTerm]);
 
-  if (status === 'pending') {
-    content = <Loading />;
-  }
-  if (status === 'error') {
-    content = <Error error={error} backdrop='failed to fetch data' />;
-  }
-
-  if (data) {
-    // console.log(data, data.pages[0].total_pages);
-    content = <>{data.pages.map((el) => renderResults(el.results))}</>;
-  }
-
-  if (fromSaved) {
-    content = (
+  
+   let content = (
       <>
         {state[mode].length === 0
           ? 'there is no bookmarked movies yet'
@@ -114,7 +71,6 @@ export default function MainContent({
       </Heading>
       <FilmGrid>
         {content}
-        {isFetchingNextPage && <Loading />}
       </FilmGrid>
     </>
   );
