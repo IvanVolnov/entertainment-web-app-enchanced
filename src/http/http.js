@@ -63,7 +63,7 @@ export async function fetchDataList({ queryKey, pageParam }) {
     throw error;
   }
   const result = await response.json();
-  console.log(result);
+  // console.log(result);
 
   if (query) {
     let filteredResult = result;

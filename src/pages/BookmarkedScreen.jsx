@@ -1,12 +1,20 @@
 import Search from '../components/Search';
-import MainContent from '../components/MainContent';
+import BookmarkedContent from '../components/BookmarkedContent';
 
 export default function BookmarkedScreen() {
   return (
     <>
       <Search />
-      <MainContent heading='Bookmarked Movies' mode='movie' fromSaved={true} />
-      <MainContent heading='Bookmarked TV Series' mode='tv' fromSaved={true} />
+      <BookmarkedContent
+        heading='Bookmarked Movies'
+        mode='movie'
+        fromSaved={true}
+      />
+      <BookmarkedContent
+        heading='Bookmarked TV Series'
+        mode='tv'
+        fromSaved={true}
+      />
     </>
   );
 }

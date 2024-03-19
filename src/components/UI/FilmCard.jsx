@@ -12,7 +12,7 @@ import {
 } from './FilmCardStyles';
 
 import { useState, useRef, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addBookmark, removeBookmark } from '../../store/store';
 
 export default function FilmCard({
@@ -31,6 +31,7 @@ export default function FilmCard({
   const [bookmarked, setBookmarked] = useState(fromSaved ? true : false);
   const coverRef = useRef(null);
   const dispatch = useDispatch();
+  const state = useSelector((state) => state);
 
   function bookmarkBtnHandler() {
     const filmData = {
@@ -42,10 +43,12 @@ export default function FilmCard({
       id,
     };
     if (!bookmarked) {
+      console.log(filmData);
       dispatch(addBookmark(filmData));
     }
     if (bookmarked) {
-      dispatch(removeBookmark(id));
+      console.log(filmData);
+      dispatch(removeBookmark(filmData));
     }
     setBookmarked((prev) => !prev);
   }

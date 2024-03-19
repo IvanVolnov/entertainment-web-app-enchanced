@@ -5,11 +5,10 @@ import { useSearchParams } from 'react-router-dom';
 import { fetchDataList } from '../http/http';
 import Error from '../components/UI/Error';
 import Heading from '../components/UI/Heading';
-import FilmCard from '../components/UI/FilmCard';
+import RenderResults from './RenderResults';
 import { Loading } from './UI/Loading';
 import { useEffect, useState } from 'react';
 import { FilmGrid } from './MainContentStyles';
-import { useSelector } from 'react-redux';
 
 export default function MainContent({
   heading,
@@ -21,38 +20,7 @@ export default function MainContent({
   const [searchParams] = useSearchParams();
   searchTerm = searchParams.get('query');
   let content;
-  const state = useSelector((state) => state);
   const [quantity, setQuantity] = useState(0);
-
-  const renderResults = (el) =>
-    el.map(
-      (
-        {
-          id,
-          name,
-          backdrop_path,
-          first_air_date,
-          release_date,
-          original_title,
-          vote_average,
-          type,
-        },
-        index
-      ) => (
-        <FilmCard
-          innerRef={el.length === index + 1 ? ref : undefined}
-          key={id}
-          id={id}
-          score={vote_average}
-          cardMode='standard'
-          name={name || original_title}
-          backdrop={backdrop_path}
-          mediaType={!type && name ? 'tv' : 'movie'}
-          releaseDate={first_air_date || release_date}
-          fromSaved={fromSaved}
-        />
-      )
-    );
 
   const {
     data,
@@ -93,16 +61,13 @@ export default function MainContent({
   }
 
   if (data) {
-    // console.log(data, data.pages[0].total_pages);
-    content = <>{data.pages.map((el) => renderResults(el.results))}</>;
-  }
-
-  if (fromSaved) {
+    // console.log(data);
+    // content = <>{data.pages.map((el) => RenderResults(data.pages.results, ref))}</>;
     content = (
       <>
-        {state[mode].length === 0
-          ? 'there is no bookmarked movies yet'
-          : renderResults(state[mode])}
+        {data.pages.map((el) => (
+          <RenderResults key={el.page} el={el.results} ref={ref} />
+        ))}
       </>
     );
   }
