@@ -51,6 +51,7 @@ export default function Trending() {
               <SwiperSlide key={id} style={{ width: 'auto' }}>
                 <FilmCard
                   key={id}
+                  id={id}
                   score={vote_average}
                   cardMode='trending'
                   name={name || original_title}

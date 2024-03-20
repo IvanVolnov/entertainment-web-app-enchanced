@@ -16,16 +16,10 @@ const bookmarkedSlice = createSlice({
       localStorage.setItem('bookmarked', JSON.stringify(state));
     },
     removeBookmark(state, action) {
-      // TODO search by name in trending films
-      state[action.payload.type] = state[action.payload.type].filter(
-        (el) => el.id !== action.payload.id
-      );
-
+      state[action.payload.type] = state[action.payload.type].filter((el) => {
+        return el.id !== action.payload.id;
+      });
       localStorage.setItem('bookmarked', JSON.stringify(state));
-      console.log(state, 'remove');
-    },
-    findBoolmark(state) {
-      console.log(state, 'find');
     },
   },
 });
@@ -34,7 +28,6 @@ const store = configureStore({
   reducer: bookmarkedSlice.reducer,
 });
 
-export const { addBookmark, removeBookmark, findBookmark } =
-  bookmarkedSlice.actions;
+export const { addBookmark, removeBookmark } = bookmarkedSlice.actions;
 
 export default store;

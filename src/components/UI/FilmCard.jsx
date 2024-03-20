@@ -11,13 +11,12 @@ import {
   CoverLoading,
 } from './FilmCardStyles';
 
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addBookmark, removeBookmark } from '../../store/store';
 
 export default function FilmCard({
   innerRef,
-  fromSaved,
   cardMode,
   name,
   backdrop,
@@ -28,32 +27,49 @@ export default function FilmCard({
 }) {
   const formattedDate = releaseDate ? new Date(releaseDate) : undefined;
   const [showCover, setShowCover] = useState(false);
-  const [bookmarked, setBookmarked] = useState(fromSaved ? true : false);
+  const [bookmarked, setBookmarked] = useState(false);
   const coverRef = useRef(null);
   const dispatch = useDispatch();
-  const state = useSelector((state) => state);
+  const bookmarkedMovies = useSelector((state) => state.movie);
+  const bookmarkedTV = useSelector((state) => state.tv);
+
+  const filmData = {
+    name,
+    backdrop_path: backdrop,
+    type: mediaType,
+    first_air_date: releaseDate,
+    score,
+    id,
+  };
+
+  const toggleBookmarked = useCallback(
+    (data) => {
+      const searchedStore =
+        data.type === 'tv' ? bookmarkedTV : bookmarkedMovies;
+      const result = searchedStore.filter((el) => el.id === data.id);
+      if (result.length > 0) {
+        setBookmarked(true);
+      }
+      if (result.length === 0) {
+        setBookmarked(false);
+      }
+    },
+    [bookmarkedMovies, bookmarkedTV]
+  );
 
   function bookmarkBtnHandler() {
-    const filmData = {
-      name,
-      backdrop_path: backdrop,
-      type: mediaType,
-      first_air_date: releaseDate,
-      score,
-      id,
-    };
     if (!bookmarked) {
-      console.log(filmData);
       dispatch(addBookmark(filmData));
     }
     if (bookmarked) {
-      console.log(filmData);
       dispatch(removeBookmark(filmData));
     }
-    setBookmarked((prev) => !prev);
+    toggleBookmarked(filmData);
   }
 
   useEffect(() => {
+    toggleBookmarked(filmData);
+
     const options = {
       root: null,
       rootMargin: '50px',
@@ -78,7 +94,7 @@ export default function FilmCard({
         observer.unobserve(coverRef.current);
       }
     };
-  }, []);
+  }, [filmData, dispatch, toggleBookmarked]);
 
   return (
     <Card $mode={cardMode} ref={innerRef}>

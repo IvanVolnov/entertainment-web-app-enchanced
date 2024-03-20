@@ -41,7 +41,6 @@ export default function MainContent({
 
   useEffect(() => {
     if (
-      !fromSaved &&
       inView &&
       hasNextPage &&
       data.pageParams.length <= data.pages[0].total_pages
@@ -61,8 +60,6 @@ export default function MainContent({
   }
 
   if (data) {
-    // console.log(data);
-    // content = <>{data.pages.map((el) => RenderResults(data.pages.results, ref))}</>;
     content = (
       <>
         {data.pages.map((el) => (

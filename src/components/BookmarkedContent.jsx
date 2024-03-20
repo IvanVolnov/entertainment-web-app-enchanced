@@ -5,34 +5,41 @@ import RenderResults from './RenderResults';
 import { useSearchParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
+import { searchInString } from '../helpers/helpers';
 
 export default function BookmarkedContent({
   heading,
   mode,
   searchTerm = undefined,
-  fromSaved = false,
 }) {
   const [searchParams] = useSearchParams();
   searchTerm = searchParams.get('query');
-  let content;
+  let content, searchResult;
   const state = useSelector((state) => state);
   const [quantity, setQuantity] = useState(0);
 
   useEffect(() => {
-    // if (searchTerm) {
-    //   setQuantity(data.pages[0].total_results);
-    // }
-  }, [searchTerm, fromSaved]);
+    if (searchTerm) {
+      setQuantity(searchResult.length);
+    }
+  }, [searchTerm, searchResult]);
 
-  content = (
-    <>
-      {state[mode].length === 0 ? (
-        <p>no bookmarked content yet...</p>
-      ) : (
-        <RenderResults el={state[mode]} fromSaved={true} />
-      )}
-    </>
-  );
+  if (searchTerm) {
+    const stateArr = Object.values(state).flat();
+    searchResult = stateArr.filter((el) => searchInString(searchTerm, el.name));
+    content = <>{<RenderResults el={searchResult} />}</>;
+    console.log(stateArr, searchTerm);
+  } else {
+    content = (
+      <>
+        {state[mode].length === 0 ? (
+          <p>no bookmarked content yet...</p>
+        ) : (
+          <RenderResults el={state[mode]} />
+        )}
+      </>
+    );
+  }
   return (
     <>
       <Heading>

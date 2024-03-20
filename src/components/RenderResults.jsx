@@ -1,10 +1,7 @@
 import { forwardRef } from 'react';
 import FilmCard from './UI/FilmCard';
 
-const RenderResults = forwardRef(function RenderResults(
-  { el, fromSaved },
-  ref
-) {
+const RenderResults = forwardRef(function RenderResults({ el }, ref) {
   return (
     <>
       {el.map(
@@ -24,7 +21,7 @@ const RenderResults = forwardRef(function RenderResults(
         ) => (
           <FilmCard
             innerRef={el.length === index + 1 ? ref : undefined}
-            key={id}
+            key={id || name}
             id={id}
             score={score || vote_average}
             cardMode='standard'
@@ -32,7 +29,6 @@ const RenderResults = forwardRef(function RenderResults(
             backdrop={backdrop_path}
             mediaType={type || (!type && name ? 'tv' : 'movie')}
             releaseDate={first_air_date || release_date}
-            fromSaved={fromSaved}
           />
         )
       )}
