@@ -2,7 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 
 export const media = {
   mobile: `(max-width: 430px)`,
-  tablet: `(max-width: 768px)`,
+  tablet: `(max-width: 1000px)`,
   laptop: `(max-width: 1024px)`,
 };
 

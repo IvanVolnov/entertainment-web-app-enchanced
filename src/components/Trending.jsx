@@ -2,6 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import styled from 'styled-components';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
+import 'swiper/css/free-mode';
+import { FreeMode } from 'swiper/modules';
 
 import { fetchTernding } from '../http/http';
 import Heading from './UI/Heading';
@@ -36,7 +38,13 @@ export default function Trending() {
   if (data) {
     trendingContent = (
       <Carousel>
-        <Swiper slidesPerView={'auto'} spaceBetween={40} grabCursor={true}>
+        <Swiper
+          slidesPerView={'auto'}
+          spaceBetween={40}
+          grabCursor={true}
+          freeMode={true}
+          modules={[FreeMode]}
+        >
           {data.map(
             ({
               id,

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import noImgSvg from '../../../public/no-image.svg';
 import { Loading } from './Loading';
+import { media } from '../../styles/Global';
 
 export const Card = styled.div`
   width: ${(props) => (props.$mode === 'standard' ? '17.5rem' : '29.38rem')};
@@ -14,8 +15,19 @@ export const Card = styled.div`
     props.$mode === 'standard'
       ? '1fr minmax(3.25rem, max-content)'
       : '1fr minmax(6.25rem, max-content)'};
+
+  /* @media ${media.tablet} {
+    width: ${(props) => (props.$mode === 'standard' ? '17.5rem' : '29.38rem')};
+    height: ${(props) =>
+    props.$mode === 'standard' ? '14.13rem' : '14.38rem'};
+  }
+
+  @media ${media.tablet} {
+    width: ${(props) => (props.$mode === 'standard' ? '17.5rem' : '29.38rem')};
+    height: ${(props) => (props.$mode === 'standard' ? '9.63rem' : '14.38rem')};
+  } */
 `;
-export const BookmarkBtn = styled.a`
+export const BookmarkBtn = styled.button`
   cursor: pointer;
   width: 2rem;
   height: 2rem;
@@ -27,8 +39,10 @@ export const BookmarkBtn = styled.a`
   background-position: center;
   border-radius: 50%;
   transition: filter 0.5s ease;
+  border: none;
 
-  &:hover {
+  &:hover,
+  &:focus {
     filter: invert(1);
   }
 `;

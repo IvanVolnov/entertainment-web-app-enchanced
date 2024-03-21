@@ -40,6 +40,10 @@ const PageWrapper = styled.main`
   gap: 2rem;
   display: flex;
   flex-direction: column;
+
+  @media ${media.tablet} {
+    width: 100%;
+  }
 `;
 
 export default function RootLayout() {

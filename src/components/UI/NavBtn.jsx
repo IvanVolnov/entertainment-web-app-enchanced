@@ -24,11 +24,10 @@ const IconWrapper = styled(NavLink)`
   }
 
   @media (hover: hover) {
-    svg:hover {
-      path {
-        fill: ${({ theme }) => theme.colors.highlight};
-        transition: fill 0.3s ease;
-      }
+    svg:hover path,
+    svg:focus path {
+      fill: ${({ theme }) => theme.colors.highlight};
+      transition: fill 0.3s ease;
     }
   }
 
