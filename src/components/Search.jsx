@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { useSearchParams } from 'react-router-dom';
 
-import searchIcon from '../assets/icon-search.svg';
+import searchIcon from '/icon-search.svg';
 
 const Form = styled.form`
   display: flex;

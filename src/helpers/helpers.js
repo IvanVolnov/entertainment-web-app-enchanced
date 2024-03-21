@@ -1,13 +1,18 @@
 export const searchInString = function (query, string) {
   console.log(query, string);
-  const splittedQuery = query.toLowerCase();
-  const splittedString = string.toLowerCase();
-  const regex = new RegExp('\\b' + splittedQuery + '\\b');
-  console.log(string.toLowerCase().search(regex));
-  //   function searchParts(term, arr) {}
-  //   return string
-  //     .toLowerCase()
-  //     .split(' ')
-  //     .find((el) => searchParts(query, el));
-  //   return string.toLowerCase().split(' ').includes(query.toLowerCase());
+  function isValidRegExp(regexString) {
+    try {
+      new RegExp(regexString);
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+  const formattedQuery = query.toLowerCase().trim();
+  if (!isValidRegExp(formattedQuery)) {
+    console.log(isValidRegExp(formattedQuery));
+    return false;
+  }
+  const splittedString = string.toLowerCase().split(' ');
+  return splittedString.some((el) => el.match(formattedQuery));
 };
