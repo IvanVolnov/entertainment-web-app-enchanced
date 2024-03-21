@@ -1,5 +1,5 @@
-import bookmarkEmpty from '../../assets/icon-bookmark-empty.svg';
-import bookmarkFull from '../../assets/icon-bookmark-full.svg';
+import bookmarkEmpty from '/icon-bookmark-empty.svg';
+import bookmarkFull from '/icon-bookmark-full.svg';
 import tvSvg from '../../assets/icon-category-tv.svg';
 import movieSvg from '../../assets/icon-category-movie.svg';
 import {
