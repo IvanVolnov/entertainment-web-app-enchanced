@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import noImgSvg from '../../assets/no-image.svg';
+import noImgSvg from '../../../public/no-image.svg';
 import { Loading } from './Loading';
 
 export const Card = styled.div`
