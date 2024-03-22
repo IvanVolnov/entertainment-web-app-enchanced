@@ -14,7 +14,7 @@ import { Loading } from './UI/Loading';
 const Carousel = styled.div`
   display: flex;
   gap: 2.5rem;
-  margin-top: 0.2rem;
+  margin-top: 0.8rem;
   margin-bottom: 0.38rem;
 `;
 

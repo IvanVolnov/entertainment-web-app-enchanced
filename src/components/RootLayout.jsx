@@ -35,7 +35,6 @@ const Wrapper = styled.div`
 
 const PageWrapper = styled.main`
   width: min(100% - 10.25rem, 163rem);
-
   margin-top: 4rem;
   gap: 2rem;
   display: flex;
@@ -43,6 +42,8 @@ const PageWrapper = styled.main`
 
   @media ${media.tablet} {
     width: 100%;
+    margin-top: unset;
+    margin-left: 1.56rem;
   }
 `;
 

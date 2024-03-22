@@ -37,4 +37,11 @@ body {
   background-color: ${({ theme }) => theme.colors.background};
   
 }
+
+input {
+  font-family: inherit;
+  font-optical-sizing: inherit;
+  font-style: inherit;
+ 
+}
 `;

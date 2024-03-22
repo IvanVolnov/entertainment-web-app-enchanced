@@ -28,7 +28,6 @@ export default function BookmarkedContent({
     const stateArr = Object.values(state).flat();
     searchResult = stateArr.filter((el) => searchInString(searchTerm, el.name));
     content = <>{<RenderResults el={searchResult} />}</>;
-    console.log(stateArr, searchTerm);
   } else {
     content = (
       <>

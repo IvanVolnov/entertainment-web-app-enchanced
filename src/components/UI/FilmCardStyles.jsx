@@ -10,7 +10,8 @@ export const Card = styled.div`
   grid-template:
     'a b'
     'c d';
-  grid-template-columns: 1fr 3.5rem;
+  grid-template-columns: ${(props) =>
+    props.$mode === 'standard' ? '1fr 3rem' : '1fr 3.5rem'};
   grid-template-rows: ${(props) =>
     props.$mode === 'standard'
       ? '1fr minmax(3.25rem, max-content)'
@@ -49,6 +50,7 @@ export const BookmarkBtn = styled.button`
 export const Info = styled.div`
   width: fit-content;
   height: fit-content;
+
   margin: ${(props) =>
     props.$mode === 'standard' ? '0rem' : '0rem 0rem 0rem 1rem'};
   padding: ${(props) => (props.$mode === 'standard' ? '0rem' : '0.5rem')};

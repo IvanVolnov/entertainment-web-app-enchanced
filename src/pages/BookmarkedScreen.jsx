@@ -7,7 +7,7 @@ export default function BookmarkedScreen() {
   const query = searchParams.get('query') ? true : false;
   return (
     <>
-      <Search />
+      <Search mode='bookmarked' />
       <BookmarkedContent heading='Bookmarked Movies' mode='movie' />
       {query || <BookmarkedContent heading='Bookmarked TV Series' mode='tv' />}
     </>
