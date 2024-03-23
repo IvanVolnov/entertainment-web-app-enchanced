@@ -1,5 +1,5 @@
 import Heading from './UI/Heading';
-import { FilmGrid } from './MainContentStyles';
+import { FilmGrid } from './UI/FilmGrid';
 import RenderResults from './RenderResults';
 
 import { useSearchParams } from 'react-router-dom';

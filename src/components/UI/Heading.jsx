@@ -7,7 +7,9 @@ const Heading = styled.h1`
   letter-spacing: -0.04rem;
 
   @media ${media.mobile} {
-    height: 1.25rem;
+    font-size: 1.25rem;
+    height: min-content;
+    letter-spacing: -0.02em;
   }
 `;
 

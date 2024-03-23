@@ -4,18 +4,23 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/free-mode';
 import { FreeMode } from 'swiper/modules';
-
 import { fetchTernding } from '../http/http';
 import Heading from './UI/Heading';
 import FilmCard from './UI/FilmCard';
 import Error from './UI/Error';
 import { Loading } from './UI/Loading';
+import { media } from '../styles/Global';
+import { useEffect, useState } from 'react';
 
 const Carousel = styled.div`
   display: flex;
   gap: 2.5rem;
   margin-top: 0.8rem;
   margin-bottom: 0.38rem;
+
+  @media ${media.mobile} {
+    margin: unset;
+  }
 `;
 
 export default function Trending() {
@@ -25,6 +30,27 @@ export default function Trending() {
   });
 
   let trendingContent;
+  const [trendingGap, setTrendingGap] = useState(40);
+  const swiperGapHandler = () => {
+    const windowWidth = window.innerWidth;
+    console.log('Window width:', windowWidth);
+    if (windowWidth <= 540 && trendingGap !== 16) {
+      setTrendingGap(16);
+      console.log(trendingGap);
+    }
+    if (windowWidth > 540 && trendingGap !== 40) {
+      setTrendingGap(40);
+      console.log(trendingGap);
+    }
+  };
+
+  useEffect(() => {
+    swiperGapHandler();
+    window.addEventListener('resize', swiperGapHandler);
+    return () => {
+      window.removeEventListener('resize', swiperGapHandler);
+    };
+  }, []);
 
   if (isPending) {
     trendingContent = <Loading />;
@@ -40,7 +66,7 @@ export default function Trending() {
       <Carousel>
         <Swiper
           slidesPerView={'auto'}
-          spaceBetween={40}
+          spaceBetween={trendingGap}
           grabCursor={true}
           freeMode={true}
           modules={[FreeMode]}

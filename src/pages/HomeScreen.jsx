@@ -3,11 +3,16 @@ import Search from '../components/Search';
 import MainContent from '../components/MainContent';
 import { useSearchParams } from 'react-router-dom';
 import styled from 'styled-components';
+import { media } from '../styles/Global';
 
 const SearchAndTrendingWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1.19rem;
+
+  @media ${media.mobile} {
+    gap: 1rem;
+  }
 `;
 
 export default function HomeScreen() {

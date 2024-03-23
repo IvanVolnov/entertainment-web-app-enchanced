@@ -8,7 +8,7 @@ import Heading from '../components/UI/Heading';
 import RenderResults from './RenderResults';
 import { Loading } from './UI/Loading';
 import { useEffect, useState } from 'react';
-import { FilmGrid } from './MainContentStyles';
+import { FilmGrid } from './UI/FilmGrid';
 
 export default function MainContent({
   heading,

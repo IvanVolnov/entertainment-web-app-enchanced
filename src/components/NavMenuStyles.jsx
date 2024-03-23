@@ -18,7 +18,7 @@ export const Menu = styled.header`
     max-height: 4.5rem;
     width: auto;
     padding: 1.31rem 1rem 1.19rem 1.5rem;
-    margin: 1.44rem 1.56rem;
+    margin: 1.44rem 1.56rem 0rem 1.56rem;
     gap: 0rem;
     flex-direction: row;
     justify-content: space-between;

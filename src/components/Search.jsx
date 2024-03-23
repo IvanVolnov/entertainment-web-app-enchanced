@@ -7,8 +7,9 @@ import searchIcon from '/icon-search.svg';
 const Form = styled.form`
   display: flex;
   gap: 1.5rem;
-  @media ${media.tablet} {
-    margin: 1.44rem 1.56rem;
+  @media ${media.mobile} {
+    gap: 1rem;
+    margin-bottom: 0.5rem;
   }
 `;
 
@@ -19,12 +20,18 @@ const SearchBtn = styled.button`
   background-color: transparent;
   border: none;
   background-image: url(${(props) => props.$image});
+  @media ${media.mobile} {
+    width: 1.5rem;
+    height: 1.5rem;
+    background-size: contain;
+  }
 `;
 
 const Input = styled.input`
   font-weight: 300;
   flex-grow: 1;
   padding-bottom: 1rem;
+  margin-right: 2.25rem;
   background: none;
   color: ${({ theme }) => theme.colors.text};
   font-weight: 400;
@@ -36,6 +43,24 @@ const Input = styled.input`
   &:focus {
     outline: none;
     border-color: ${({ theme }) => theme.colors.secondary};
+  }
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    -webkit-text-fill-color: ${({ theme }) => theme.colors.text} !important;
+    -webkit-box-shadow: 0 0 0 30px ${({ theme }) => theme.colors.background}
+      inset !important;
+  }
+  &:-webkit-autofill::placeholder {
+    font-size: 3rem; /* Adjust the font size for placeholder text */
+    opacity: 1; /* Ensure the placeholder text is visible */
+  }
+
+  @media ${media.mobile} {
+    font-size: 1rem;
+    padding-bottom: unset;
   }
 `;
 

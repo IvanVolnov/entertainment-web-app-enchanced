@@ -26,6 +26,7 @@ const Wrapper = styled.div`
     flex-direction: column;
     justify-items: stretch;
     gap: 2.06rem;
+    justify-content: flex-start;
   }
 
   @media ${media.mobile} {
@@ -41,9 +42,15 @@ const PageWrapper = styled.main`
   flex-direction: column;
 
   @media ${media.tablet} {
-    width: 100%;
+    width: calc(100% - 1.56rem);
     margin-top: unset;
     margin-left: 1.56rem;
+  }
+
+  @media ${media.mobile} {
+    width: calc(100% - 1rem);
+    margin-left: 1rem;
+    gap: 1.5rem;
   }
 `;
 

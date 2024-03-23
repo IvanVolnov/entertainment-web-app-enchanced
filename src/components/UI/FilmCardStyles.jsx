@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import noImgSvg from '../../../public/no-image.svg';
+import noImgSvg from '/no-image.svg';
 import { Loading } from './Loading';
 import { media } from '../../styles/Global';
 
@@ -17,16 +17,21 @@ export const Card = styled.div`
       ? '1fr minmax(3.25rem, max-content)'
       : '1fr minmax(6.25rem, max-content)'};
 
-  /* @media ${media.tablet} {
-    width: ${(props) => (props.$mode === 'standard' ? '17.5rem' : '29.38rem')};
-    height: ${(props) =>
-    props.$mode === 'standard' ? '14.13rem' : '14.38rem'};
+  @media ${media.tablet} {
+    width: ${(props) => (props.$mode === 'standard' ? '13.75rem' : '29.38rem')};
+    height: ${(props) => (props.$mode === 'standard' ? '12rem' : '14.38rem')};
   }
 
-  @media ${media.tablet} {
-    width: ${(props) => (props.$mode === 'standard' ? '17.5rem' : '29.38rem')};
-    height: ${(props) => (props.$mode === 'standard' ? '9.63rem' : '14.38rem')};
-  } */
+  @media ${media.mobile} {
+    width: ${(props) => (props.$mode === 'standard' ? '10.25rem' : '15rem')};
+    height: ${(props) => (props.$mode === 'standard' ? '9.63rem' : '8.75rem')};
+    grid-template-columns: ${(props) =>
+      props.$mode === 'standard' ? '1fr 2.5rem' : '1fr 2.5rem'};
+    grid-template-rows: ${(props) =>
+      props.$mode === 'standard'
+        ? '1fr minmax(2.7rem, max-content)'
+        : '1fr minmax(4.2rem, max-content)'};
+  }
 `;
 export const BookmarkBtn = styled.button`
   cursor: pointer;
@@ -45,6 +50,10 @@ export const BookmarkBtn = styled.button`
   &:hover,
   &:focus {
     filter: invert(1);
+  }
+
+  @media ${media.mobile} {
+    margin-top: 0.5rem;
   }
 `;
 export const Info = styled.div`
@@ -68,6 +77,23 @@ export const Info = styled.div`
     font-weight: 300;
     font-size: ${(props) =>
       props.$mode === 'standard' ? '1.12rem;' : '1.88rem'};
+  }
+
+  @media ${media.tablet} {
+    h2 {
+      font-weight: 300;
+      font-size: ${(props) =>
+        props.$mode === 'standard' ? '1.12rem;' : '1.5rem'};
+    }
+  }
+
+  @media ${media.mobile} {
+    margin: ${(props) =>
+      props.$mode === 'standard' ? '0rem' : '0rem 0rem 0rem 0.5rem'};
+    h2 {
+      font-size: ${(props) =>
+        props.$mode === 'standard' ? '0.88rem;' : '0.94rem'};
+    }
   }
 `;
 export const Cover = styled.div`
@@ -93,6 +119,11 @@ export const Char = styled.div`
   > span:nth-child(n + 2)::before {
     content: '·';
     padding-right: 0.5em;
+  }
+
+  @media ${media.mobile} {
+    font-size: ${(props) =>
+      props.$mode === 'standard' ? '0.69rem;' : '0.75rem'};
   }
 `;
 
