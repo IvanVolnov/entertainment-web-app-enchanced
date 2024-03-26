@@ -33,14 +33,11 @@ export default function Trending() {
   const [trendingGap, setTrendingGap] = useState(40);
   const swiperGapHandler = () => {
     const windowWidth = window.innerWidth;
-    console.log('Window width:', windowWidth);
     if (windowWidth <= 540 && trendingGap !== 16) {
       setTrendingGap(16);
-      console.log(trendingGap);
     }
     if (windowWidth > 540 && trendingGap !== 40) {
       setTrendingGap(40);
-      console.log(trendingGap);
     }
   };
 
