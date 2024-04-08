@@ -10,7 +10,7 @@ This project is my personal practice endeavor, inspired by the Entertainment web
 
 ## Screenshots
 
-![App Screenshot](https://github.com/IvanVolnov/entertainment-web-app-enchanced/tree/main/design/main/screenshots/entertainment-web-app-enchanced-netlify-app-1500x1200desktop75-750bca.png)
+![App Screenshot](https://github.com/IvanVolnov/entertainment-web-app-enchanced/blob/main/design/screenshots/entertainment-web-app-enchanced-netlify-app-1500x1200desktop75-750bca.png)
 
 ## Built with
 
